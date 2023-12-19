@@ -1,8 +1,18 @@
 from question_data import QuestionGeneretor
 import html
+from question_object import Question
 
 question_generator = QuestionGeneretor()
+question_data = question_generator.questions
 
+question_list = []
+for question_data in question_data:
+    question_text = question_data['question']
+    question_answer = question_data['correct_answer']
+    new_question = Question(question_text, question_answer)
+    question_list.append(new_question)
+
+print(question_list)
 
 # if len(CATEGORIES) > 0:
 #             count = 1
