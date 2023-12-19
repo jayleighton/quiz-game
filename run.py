@@ -8,14 +8,14 @@ question_data = question_generator.questions
 
 question_list = []
 for question_data in question_data:
-    question_text = question_data['question']
+    question_text = html.unescape(question_data['question'])
     question_answer = question_data['correct_answer']
     new_question = Question(question_text, question_answer)
     question_list.append(new_question)
 
 quiz_manager = QuizManager(question_list)
-print("Quiz Manager Created")
-print(quiz_manager.has_question())
+while quiz_manager.has_question():
+    quiz_manager.next_question()
 
 # if len(CATEGORIES) > 0:
 #             count = 1
