@@ -8,7 +8,6 @@ import os
 def main():
 
     while True:
-
         question_generator = QuestionGeneretor()
         question_data = question_generator.questions
 
@@ -39,5 +38,3 @@ def main():
 
 
 main()
-# question_generator = QuestionGeneretor()
-# question_data = question_generator.questions
