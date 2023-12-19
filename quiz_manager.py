@@ -54,7 +54,8 @@ class QuizManager:
 
     def check_answer(self, users_answer):
         """
-        Receives the users answer as a parameter and check it against the correct answer
+        Receives the users answer as a parameter and check it against the
+        correct answer
         Sets the answer response
         """
         correct_answer = self.current_quesion.question_answer
@@ -63,7 +64,7 @@ class QuizManager:
             self.score += 1
         else:
             self.message = f"Incorrect! The correct answer was: "\
-                "{correct_answer}\n"
+                f"{correct_answer}\n"
         # Clear the display
         os.system('clear')
 

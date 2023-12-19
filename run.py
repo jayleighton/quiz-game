@@ -23,7 +23,7 @@ def main():
 
         # Initialize the quiz manager
         quiz_manager = QuizManager(question_list)
-        
+
         # Clear the console
         os.system('clear')
 
