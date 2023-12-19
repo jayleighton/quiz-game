@@ -8,7 +8,7 @@ import os
 def main():
 
     while True:
-        
+
         question_generator = QuestionGeneretor()
         question_data = question_generator.questions
 
@@ -30,13 +30,12 @@ def main():
         quiz_manager.show_result()
 
         # Check if users wants to play again
-        result = input("\nDo you want to play again? Y/N\n")
+        result = input("\nDo you want to play again? Y / N\n")
         if result.upper() != 'Y':
             print("Thanks for playing!")
             break
         else:
             os.system('clear')
-            
 
 
 main()

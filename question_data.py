@@ -30,6 +30,7 @@ CATEGORIES = {
 
 class QuestionGeneretor:
 
+
     def __init__(self):
         self.question_count = 0
         self.questions = {}
@@ -39,6 +40,7 @@ class QuestionGeneretor:
         self.get_question_category()
         self.get_diffculty()
         self.get_questions()
+
 
     def get_question_category(self):
         os.system('clear')
@@ -58,7 +60,8 @@ class QuestionGeneretor:
                 except ValueError as e:
                     os.system('clear')
                     print(f"\nInvalid category selected.\nPlease enter a category between 1 and {len(category_list)}")
-    
+
+
     def get_diffculty(self):
         os.system('clear')
         print(LOGO)
@@ -72,29 +75,27 @@ class QuestionGeneretor:
             self.difficulty = 'hard'
         else:
             self.difficulty = 'any'
-        
+
 
     def get_questions(self):
-        params = {
-            'type': 'boolean'
-        }
+        params = {'type': 'boolean'}
 
         params['amount'] = self.question_count
         if self.question_category != 'Any':
             params['category'] = CATEGORIES[self.question_category]
-        
+
         if self.difficulty != 'any':
             params['difficulty'] = self.difficulty
-        
+
 
         result = requests.get(url=TRIVIA_URL, params=params)
         self.questions = result.json()['results']
+
 
     def get_question_count(self):
         print(LOGO)
         print("Welcome to the Quiz Game")
         while True:
-            
             try:
                 question_amount = int(input("How many questions would you like?:\nEnter a number between 10 and 40, or 0 to quit\n"))
                 if question_amount == 0:
@@ -108,6 +109,5 @@ class QuestionGeneretor:
                 os.system('clear')
                 print(LOGO)
                 print("Please enter a valid value between 10 and 40")
-            
-            
+
 
