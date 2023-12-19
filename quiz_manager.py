@@ -58,7 +58,7 @@ class QuizManager:
         elif result < 80:
             print("Well done!")
         else:
-            print("Excellent work!")
+            print("Excellent!")
 
         print(f"\nYour score is: {self.score}/{self.question_number}"
             f", {math.floor(result)}% ")
