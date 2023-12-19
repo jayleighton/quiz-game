@@ -33,8 +33,10 @@ class QuestionGeneretor:
         self.question_count = 0
         self.questions = {}
         self.question_category = 0
+        self.difficulty = ""
         self.get_question_count()
         self.get_question_category()
+        self.get_diffculty()
         self.get_questions()
 
     def get_question_category(self):
@@ -56,6 +58,21 @@ class QuestionGeneretor:
                     os.system('clear')
                     print(f"\nInvalid category selected.\nPlease enter a category between 1 and {len(category_list)}")
     
+    def get_diffculty(self):
+        os.system('clear')
+        print(LOGO)
+        print("Choose a difficulty\n")
+        difficulty = input("(E)asy, (M)edium, (H)ard, or (A)ny\n")
+        if difficulty[0].lower() == 'e':
+            self.difficulty = 'easy'
+        elif difficulty[0].lower() == 'm':
+            self.difficulty = 'medium'
+        elif difficulty[0].lower() == 'h':
+            self.difficulty = 'hard'
+        else:
+            self.difficulty = 'any'
+        
+
     def get_questions(self):
         params = {
             'amount': self.question_count,
