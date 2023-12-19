@@ -1,7 +1,10 @@
-import question_data as QD 
+from question_data import QuestionGeneretor
 import html
 
-number_of_questions = QD.get_question_count()
+question_generator = QuestionGeneretor()
+question_generator.get_question_count()
+question_generator.get_question_category()
+
 # if len(CATEGORIES) > 0:
 #             count = 1
 #             for category in CATEGORIES:

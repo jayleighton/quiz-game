@@ -27,34 +27,51 @@ CATEGORIES = {
 }
 
 
-def get_questions(number_of_questions, question_category):
-    params = {
-        'amount': number_of_questions,
-        'category': question_category,
-        'type': 'boolean'
-    }
+class QuestionGeneretor:
 
-    result = requests.get(url=TRIVIA_URL, params=params)
-    return result.json()['results']
+    def __init__(self):
+        self.question_count = 0
+        self.questions = {}
+        self.question_category = 0
 
-
-def get_question_count():
-    print(LOGO)
-    print("Welcome to the Quiz Game")
-    while True:
+    def get_question_category(self):
+        print("Please select a category from the list:")
+        if len(CATEGORIES) > 0:
+            count = 1
+            for category in CATEGORIES:
+                print(f"{count}. {category}")
+                count += 1
+        selected_category
         
-        try:
-            question_amount = int(input("How many questions would you like?:\nEnter a number between 10 and 40, or 0 to quit\n"))
-            if question_amount == 0:
-                print('Exiting')
-                break
-            if question_amount < 10 or question_amount > 40:
-                raise ValueError()
-            return question_amount
-        except ValueError:
-            os.system('clear')
-            print(LOGO)
-            print("Please enter a valid value between 10 and 40")
+
+    def get_questions(self, question_category):
+        params = {
+            'amount': number_of_questions,
+            'category': question_category,
+            'type': 'boolean'
+        }
+
+        result = requests.get(url=TRIVIA_URL, params=params)
+        return result.json()['results']
+
+    def get_question_count(self):
+        print(LOGO)
+        print("Welcome to the Quiz Game")
+        while True:
+            
+            try:
+                question_amount = int(input("How many questions would you like?:\nEnter a number between 10 and 40, or 0 to quit\n"))
+                if question_amount == 0:
+                    print('Exiting')
+                    break
+                if question_amount < 10 or question_amount > 40:
+                    raise ValueError()
+                self.question_count = question_amount
+                return self.question_count
+            except ValueError:
+                os.system('clear')
+                print(LOGO)
+                print("Please enter a valid value between 10 and 40")
             
             
 
