@@ -8,8 +8,8 @@ LOGO = """
         \ \ \/\_\  \ \ \_\ \  \ \ \  \/_/  /__     \ \ \__ \  \ \  __ \  \ \ \-./\ \  \ \  __\   
          \ \___\_\  \ \_____\  \ \_\   /\_____\     \ \_____\  \ \_\ \_\  \ \_\ \ \_\  \ \_____\ 
           \/___/_/   \/_____/   \/_/   \/_____/      \/_____/   \/_/\/_/   \/_/  \/_/   \/_____/ 
-                                                                                         
-       """
+
+"""
 
 TRIVIA_URL = 'https://opentdb.com/api.php'
 
@@ -33,26 +33,36 @@ class QuestionGeneretor:
         self.question_count = 0
         self.questions = {}
         self.question_category = 0
+        self.get_question_count()
+        self.get_question_category()
+        self.get_questions()
 
     def get_question_category(self):
-        print("Please select a category from the list:")
-        if len(CATEGORIES) > 0:
-            count = 1
-            for category in CATEGORIES:
-                print(f"{count}. {category}")
-                count += 1
-        selected_category
-        
-
-    def get_questions(self, question_category):
+        while True:
+            print("\nPlease select a category from the list:")
+            if len(CATEGORIES) > 0:
+                category_list = [category for category in CATEGORIES.keys()]
+                for index in range(len(category_list)):
+                    print(f"{index + 1}: {category_list[index]}")
+                try:
+                    selected_category = int(input("Please enter your category number:\n"))
+                    if selected_category < 1 or selected_category > 10:
+                        raise ValueError(selected_category)
+                    self.question_category = category_list[selected_category -1]
+                    break
+                except ValueError as e:
+                    os.system('clear')
+                    print(f"\nInvalid category selected.\nPlease enter a category between 1 and {len(category_list)}")
+    
+    def get_questions(self):
         params = {
-            'amount': number_of_questions,
-            'category': question_category,
+            'amount': self.question_count,
+            'category': CATEGORIES[self.question_category],
             'type': 'boolean'
         }
 
         result = requests.get(url=TRIVIA_URL, params=params)
-        return result.json()['results']
+        self.questions = result.json()['results']
 
     def get_question_count(self):
         print(LOGO)
