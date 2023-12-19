@@ -1,3 +1,9 @@
-# Your code goes here.
-# You can delete these comments, but do not change the name of this file
-# Write your code to expect a terminal of 80 characters wide and 24 rows high
+import question_data as QD 
+import html
+
+questions = QD.get_questions(10, 9)
+for question in questions:
+    answer = question['correct_answer']
+    question = html.unescape(question['question'])
+    print(question)
+    print(answer)

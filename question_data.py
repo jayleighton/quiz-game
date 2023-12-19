@@ -1,5 +1,4 @@
 import requests
-import html
 from pprint import pprint
 
 TRIVIA_URL = 'https://opentdb.com/api.php'
@@ -28,10 +27,5 @@ def get_questions(number_of_questions, question_category):
     return result.json()['results']
 
 
-questions = get_questions(10, 9)
-for question in questions:
-    answer = question['correct_answer']
-    question = html.unescape(question['question'])
-    print(question)
-    print(answer)
+
 
