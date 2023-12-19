@@ -60,5 +60,5 @@ class QuizManager:
         else:
             print("Excellent work!")
 
-        print(f"\nYour score is: {self.score} / {self.question_number}"
-            f", {math.floor(result)} % ")
+        print(f"\nYour score is: {self.score}/{self.question_number}"
+            f", {math.floor(result)}% ")

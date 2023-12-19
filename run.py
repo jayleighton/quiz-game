@@ -39,3 +39,5 @@ def main():
 
 
 main()
+# question_generator = QuestionGeneretor()
+# question_data = question_generator.questions

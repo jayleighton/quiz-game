@@ -1,6 +1,7 @@
 import requests
 from pprint import pprint
 import os
+import time
 
 LOGO = """
          ______     __  __     __     ______        ______     ______     __    __     ______    
@@ -78,26 +79,37 @@ class QuestionGeneretor:
 
 
     def get_questions(self):
-        params = {'type': 'boolean'}
-
-        params['amount'] = self.question_count
+        params = {
+            'amount': self.question_count
+        }
+        
         if self.question_category != 'Any':
             params['category'] = CATEGORIES[self.question_category]
 
         if self.difficulty != 'any':
             params['difficulty'] = self.difficulty
-
-
+        params['type'] = 'boolean'
+        print("Getting questions")
+                
         result = requests.get(url=TRIVIA_URL, params=params)
+        if len(result.json()['results']) == 0:
+            del params['difficulty']
+            print("No questions for difficulty selectec.")
+            print("Fetching questions for Any diffulty.\nPlease wait...")
+            time.sleep(5)
+            result = requests.get(url=TRIVIA_URL, params=params)
+            print(result.json())
+            
         self.questions = result.json()['results']
 
-
+ 
     def get_question_count(self):
         print(LOGO)
         print("Welcome to the Quiz Game")
         while True:
             try:
-                question_amount = int(input("How many questions would you like?:\nEnter a number between 10 and 40, or 0 to quit\n"))
+                print("How many questions would you like?\n")
+                question_amount = int(input("Enter a number between 10 and 40, or 0 to quit\n"))
                 if question_amount == 0:
                     print('Exiting')
                     break
