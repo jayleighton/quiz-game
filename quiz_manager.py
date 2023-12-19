@@ -48,10 +48,10 @@ class QuizManager:
         print(LOGO)
         print("Quiz Complete!\n")
         if result < 50:
-            print("Better luck next time.")
+            print("Better luck next time...")
         elif result < 80:
             print("Well done!")
         else:
             print("Excellent work!")
 
-        print(f"Your score is: {self.score}/{self.question_number}, {math.floor(result)}%")
+        print(f"\nYour score is: {self.score}/{self.question_number}, {math.floor(result)}%")
