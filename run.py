@@ -1,6 +1,7 @@
 from question_data import QuestionGeneretor
 import html
 from question_object import Question
+from quiz_manager import QuizManager
 
 question_generator = QuestionGeneretor()
 question_data = question_generator.questions
@@ -12,7 +13,9 @@ for question_data in question_data:
     new_question = Question(question_text, question_answer)
     question_list.append(new_question)
 
-print(question_list)
+quiz_manager = QuizManager(question_list)
+print("Quiz Manager Created")
+print(quiz_manager.has_question())
 
 # if len(CATEGORIES) > 0:
 #             count = 1
