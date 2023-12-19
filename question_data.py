@@ -92,12 +92,14 @@ class QuestionGeneretor:
         print("Getting questions")
                 
         result = requests.get(url=TRIVIA_URL, params=params)
+        result.raise_for_status()
         if len(result.json()['results']) == 0 and self.difficulty != 'any':
             del params['difficulty']
             print("No questions for difficulty selected.")
             print('Fetching questions for "Any" difficulty.\nPlease wait...')
             time.sleep(5)
             result = requests.get(url=TRIVIA_URL, params=params)
+            result.raise_for_status()
             print(result.json())
             
         self.questions = result.json()['results']
