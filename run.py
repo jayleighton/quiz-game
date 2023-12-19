@@ -7,10 +7,13 @@ import os
 
 def main():
 
+    # Game loop
     while True:
+        # Initialize question generator
         question_generator = QuestionGeneretor()
         question_data = question_generator.questions
 
+        # Loop through questions, create Question object and add to list
         question_list = []
         for question_data in question_data:
             question_text = html.unescape(question_data['question'])
@@ -18,14 +21,17 @@ def main():
             new_question = Question(question_text, question_answer)
             question_list.append(new_question)
 
+        # Initialize the quiz manager
         quiz_manager = QuizManager(question_list)
+        
         # Clear the console
         os.system('clear')
 
-        # Run the game while questions are available
+        # Run the game while more questions are available
         while quiz_manager.has_question():
             quiz_manager.next_question()
 
+        # Display the score
         quiz_manager.show_result()
 
         # Check if users wants to play again

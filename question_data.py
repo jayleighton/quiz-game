@@ -29,9 +29,14 @@ CATEGORIES = {
 
 
 class QuestionGeneretor:
-
-
     def __init__(self):
+        """
+        Creates an instance of the Question Generator class.
+        Prompts the user to select the question category, difficulty and
+        number of questions.
+        Obtains questions via API and stores to an instance variable as a
+        list of Question objects.
+        """
         self.question_count = 0
         self.questions = {}
         self.question_category = 0
@@ -43,15 +48,23 @@ class QuestionGeneretor:
 
 
     def get_question_category(self):
+        """
+        Prompts the user to select the question category from a list.
+        """
+        # Clear the screen
         os.system('clear')
         print(LOGO)
         while True:
             print("Please select a category from the list:")
+            # Validate category dict is not blank
             if len(CATEGORIES) > 0:
+                # Create a list of categories
                 category_list = [category for category in CATEGORIES.keys()]
+                # Generate the list to display to the user
                 for index in range(len(category_list)):
                     print(f"{index + 1}: {category_list[index]}")
                 try:
+                    # Validate input
                     selected_category = int(input("Please enter your category number:\n"))
                     if selected_category < 1 or selected_category > len(category_list):
                         raise ValueError(selected_category)
@@ -63,8 +76,14 @@ class QuestionGeneretor:
 
 
     def get_diffculty(self):
+        """
+        Prompts the user for the difficulty level.
+        The user can choose from Easy, Medium, Hard or Any
+        """
+        # Clear the screen
         os.system('clear')
         print(LOGO)
+        # Prompt user to select difficulty
         print("Choose a difficulty\n")
         difficulty = input("(E)asy, (M)edium, (H)ard, or (A)ny\n")
         if difficulty[0].lower() == 'e':
@@ -78,47 +97,66 @@ class QuestionGeneretor:
 
 
     def get_questions(self):
+        """
+        Uses the answers from the user to fetch the questions via API.
+
+        """
+        # Set the amount of questions parameter and the question type
         params = {
-            'amount': self.question_count
+            'amount': self.question_count,
+            'type': 'boolean',
         }
         
+        # Check the category and add the parameter if not any
         if self.question_category != 'Any':
             params['category'] = CATEGORIES[self.question_category]
 
+        # Check the difficulty and add the parameter if not any
         if self.difficulty != 'any':
             params['difficulty'] = self.difficulty
-        params['type'] = 'boolean'
+        
         print("Getting questions")
-                
         result = requests.get(url=TRIVIA_URL, params=params)
         result.raise_for_status()
+        # Validate the question list is not empty
         if len(result.json()['results']) == 0 and self.difficulty != 'any':
+            # Set the difficulty to Any
             del params['difficulty']
             print("No questions for difficulty selected.")
             print('Fetching questions for "Any" difficulty.\nPlease wait...')
+            # Wait 5 seconds due to API restriction
             time.sleep(5)
+            # Call the API again
             result = requests.get(url=TRIVIA_URL, params=params)
             result.raise_for_status()
-            print(result.json())
-            
+        # Save the questions to the instance variable
         self.questions = result.json()['results']
 
  
     def get_question_count(self):
+        """
+        Prompt the user for the number of questions.
+        Validates the amount entered and stores to an instance variable
+        """
         print(LOGO)
         print("Welcome to the Quiz Game")
         while True:
             try:
+                # Prompt for the number of questions
                 print("How many questions would you like?\n")
                 question_amount = int(input("Enter a number between 10 and 40, or 0 to quit\n"))
+                # Validate the input
                 if question_amount == 0:
                     print('Exiting')
                     break
                 if question_amount < 10 or question_amount > 40:
                     raise ValueError()
+                # Store the number of questions to the instance variable
                 self.question_count = question_amount
-                return self.question_count
+                # Exit the While loop
+                break
             except ValueError:
+                # Input error, prompt again
                 os.system('clear')
                 print(LOGO)
                 print("Please enter a valid value between 10 and 40")
