@@ -23,7 +23,8 @@ CATEGORIES = {
     'Animals': 27,
     'History': 23,
     'Mythology': 20,
-    'Science and Nature': 17
+    'Science and Nature': 17,
+    'Any': 0,
 }
 
 
@@ -50,7 +51,7 @@ class QuestionGeneretor:
                     print(f"{index + 1}: {category_list[index]}")
                 try:
                     selected_category = int(input("Please enter your category number:\n"))
-                    if selected_category < 1 or selected_category > 10:
+                    if selected_category < 1 or selected_category > len(category_list):
                         raise ValueError(selected_category)
                     self.question_category = category_list[selected_category -1]
                     break
@@ -75,10 +76,16 @@ class QuestionGeneretor:
 
     def get_questions(self):
         params = {
-            'amount': self.question_count,
-            'category': CATEGORIES[self.question_category],
             'type': 'boolean'
         }
+
+        params['amount'] = self.question_count
+        if self.question_category != 'Any':
+            params['category'] = CATEGORIES[self.question_category]
+        
+        if self.difficulty != 'any':
+            params['difficulty'] = self.difficulty
+        
 
         result = requests.get(url=TRIVIA_URL, params=params)
         self.questions = result.json()['results']
