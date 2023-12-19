@@ -22,5 +22,4 @@ os.system('clear')
 while quiz_manager.has_question():
     quiz_manager.next_question()
 
-print("All questions complete.")
-print(f"Your score is: {quiz_manager.score}/{quiz_manager.question_number}")
+quiz_manager.show_result()

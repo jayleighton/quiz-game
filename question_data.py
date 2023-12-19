@@ -38,8 +38,10 @@ class QuestionGeneretor:
         self.get_questions()
 
     def get_question_category(self):
+        os.system('clear')
+        print(LOGO)
         while True:
-            print("\nPlease select a category from the list:")
+            print("Please select a category from the list:")
             if len(CATEGORIES) > 0:
                 category_list = [category for category in CATEGORIES.keys()]
                 for index in range(len(category_list)):
