@@ -2,6 +2,7 @@ from question_data import QuestionGeneretor
 import html
 from question_object import Question
 from quiz_manager import QuizManager
+import os
 
 question_generator = QuestionGeneretor()
 question_data = question_generator.questions
@@ -14,20 +15,12 @@ for question_data in question_data:
     question_list.append(new_question)
 
 quiz_manager = QuizManager(question_list)
+# Clear the console
+os.system('clear')
+
+# Run the game while questions are available
 while quiz_manager.has_question():
     quiz_manager.next_question()
 
-# if len(CATEGORIES) > 0:
-#             count = 1
-#             for category in CATEGORIES:
-#                 print(f"{count}. {category}")
-#                 count += 1
-
-# print(len(QD.CATEGORIES))
-
-# questions = QD.get_questions(10, 9)
-# for question in questions:
-#     answer = question['correct_answer']
-#     question = html.unescape(question['question'])
-#     print(question)
-#     print(answer)
+print("All questions complete.")
+print(f"Your score is: {quiz_manager.score}/{quiz_manager.question_number}")

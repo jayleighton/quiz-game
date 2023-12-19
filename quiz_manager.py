@@ -1,6 +1,7 @@
 from question_object import Question
 import os
 
+
 class QuizManager:
     def __init__(self, question_list):
         self.score = 0
@@ -8,11 +9,12 @@ class QuizManager:
         self.question_list = question_list
         self.current_quesion = None
         os.system('clear')
-    
+
     def has_question(self):
         return self.question_number < len(self.question_list)
-    
+
     def next_question(self):
+        os.system('clear')
         self.current_quesion = self.question_list[self.question_number]
         self.question_number += 1
         while True:
