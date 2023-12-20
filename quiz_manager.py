@@ -2,9 +2,10 @@ from question_object import Question
 import os
 from question_data import LOGO
 import math
+from clearmixin import ClearMixin
 
 
-class QuizManager:
+class QuizManager(ClearMixin):
     def __init__(self, question_list):
         """
         Creates an instance of the Quiz Manager class.
@@ -14,9 +15,9 @@ class QuizManager:
         self.score = 0
         self.question_number = 0
         self.question_list = question_list
-        self.current_quesion = None
+        self.current_question = None
         self.message = ""
-        os.system('clear')
+        self.clear_screen()
 
 
     def has_question(self):
@@ -31,20 +32,23 @@ class QuizManager:
         Gets the next question from the list and displays to the user.
         """
         # Set the current question
-        self.current_quesion = self.question_list[self.question_number]
+        self.current_question = self.question_list[self.question_number]
         self.question_number += 1
         while True:
             print(LOGO)
             print(self.message)
             try:
+                # Display the question
+                q_text = self.current_question.question_text
+                print(f"Q.{self.question_number}: {q_text}")
                 # Get the user answer
-                user_answer = input(f"Q.{self.question_number}: "
-                    f"{self.current_quesion.question_text}. True / False\n")
+                user_answer = input('(T)rue or (F)alse\n')
+                    
                 # Check that an answer was provided
                 if len(user_answer) == 0:
                     raise ValueError()
             except ValueError:
-                os.system('clear')
+                self.clear_screen()
                 print("Invalid answer supplied.\nPlease try again\n")
             else:
                 # Check the users answer against for the current question
@@ -58,7 +62,7 @@ class QuizManager:
         correct answer
         Sets the answer response
         """
-        correct_answer = self.current_quesion.question_answer
+        correct_answer = self.current_question.question_answer
         if users_answer[0].lower() == correct_answer[0].lower():
             self.message = "Well Done! That is correct\n"
             self.score += 1
@@ -66,7 +70,7 @@ class QuizManager:
             self.message = f"Incorrect! The correct answer was: "\
                 f"{correct_answer}\n"
         # Clear the display
-        os.system('clear')
+        self.clear_screen()
 
 
     def show_result(self):

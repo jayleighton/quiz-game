@@ -1,6 +1,7 @@
 import requests
 import os
 import time
+from clearmixin import ClearMixin
 
 LOGO = """
          ______     __  __     __     ______        ______     ______     __    __     ______    
@@ -28,7 +29,7 @@ CATEGORIES = {
 }
 
 
-class QuestionGeneretor:
+class QuestionGeneretor(ClearMixin):
     def __init__(self):
         """
         Creates an instance of the Question Generator class.
@@ -52,7 +53,7 @@ class QuestionGeneretor:
         Prompts the user to select the question category from a list.
         """
         # Clear the screen
-        os.system('clear')
+        self.clear_screen()
         print(LOGO)
         while True:
             print("Please select a category from the list:")
@@ -71,7 +72,7 @@ class QuestionGeneretor:
                     self.question_category = category_list[selected_category -1]
                     break
                 except ValueError as e:
-                    os.system('clear')
+                    self.clear_screen()
                     print(f"\nInvalid category selected.\nPlease enter a category between 1 and {len(category_list)}")
 
 
@@ -81,7 +82,7 @@ class QuestionGeneretor:
         The user can choose from Easy, Medium, Hard or Any
         """
         # Clear the screen
-        os.system('clear')
+        self.clear_screen()
         print(LOGO)
         # Prompt user to select difficulty
         print("Choose a difficulty\n")
@@ -115,11 +116,10 @@ class QuestionGeneretor:
         if self.difficulty != 'any':
             params['difficulty'] = self.difficulty
         
-        print("Getting questions")
-        result = requests.get(url=TRIVIA_URL, params=params)
-        result.raise_for_status()
+        
+        results = self.post_request(parameters=params, message="Getting questions")
         # Validate the question list is not empty
-        if len(result.json()['results']) == 0 and self.difficulty != 'any':
+        if len(results) == 0 and self.difficulty != 'any':
             # Set the difficulty to Any
             del params['difficulty']
             print("No questions for difficulty selected.")
@@ -127,12 +127,18 @@ class QuestionGeneretor:
             # Wait 5 seconds due to API restriction
             time.sleep(5)
             # Call the API again
-            result = requests.get(url=TRIVIA_URL, params=params)
-            result.raise_for_status()
+            results = self.post_request(parameters=params, message='Fetching questions for "Any" difficulty.\nPlease wait...')
         # Save the questions to the instance variable
-        self.questions = result.json()['results']
+        self.questions = results
 
  
+    def post_request(self, parameters, message):
+        
+        result = requests.get(url=TRIVIA_URL, params=parameters)
+        result.raise_for_status()
+
+        return result.json()['results']
+
     def get_question_count(self):
         """
         Prompt the user for the number of questions.
@@ -157,7 +163,7 @@ class QuestionGeneretor:
                 break
             except ValueError:
                 # Input error, prompt again
-                os.system('clear')
+                self.clear_screen()
                 print(LOGO)
                 print("Please enter a valid value between 10 and 40")
 
