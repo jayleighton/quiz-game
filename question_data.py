@@ -38,13 +38,14 @@ class QuestionGeneretor(ClearMixin):
         Obtains questions via API and stores to an instance variable as a
         list of Question objects.
         """
-        self.question_count = 0
+        self.question_count = self.get_question_count()
         self.questions = {}
-        self.question_category = 0
-        self.difficulty = ""
-        self.get_question_count()
-        self.get_question_category()
-        self.get_diffculty()
+        self.question_category = self.get_question_category()
+        self.difficulty = self.get_diffculty()
+        self.question_type = self.get_question_type()
+        
+        
+        
         self.get_questions()
 
 
@@ -69,7 +70,7 @@ class QuestionGeneretor(ClearMixin):
                     selected_category = int(input("Please enter your category number:\n"))
                     if selected_category < 1 or selected_category > len(category_list):
                         raise ValueError(selected_category)
-                    self.question_category = category_list[selected_category -1]
+                    return category_list[selected_category -1]
                     break
                 except ValueError as e:
                     self.clear_screen()
@@ -83,18 +84,59 @@ class QuestionGeneretor(ClearMixin):
         """
         # Clear the screen
         self.clear_screen()
-        print(LOGO)
         # Prompt user to select difficulty
-        print("Choose a difficulty\n")
-        difficulty = input("(E)asy, (M)edium, (H)ard, or (A)ny\n")
-        if difficulty[0].lower() == 'e':
-            self.difficulty = 'easy'
-        elif difficulty[0].lower() == 'm':
-            self.difficulty = 'medium'
-        elif difficulty[0].lower() == 'h':
-            self.difficulty = 'hard'
-        else:
-            self.difficulty = 'any'
+        while True:
+            print(LOGO)
+            print("Choose a difficulty\n")
+            try:
+                difficulty = input("(E)asy, (M)edium, (H)ard, or (A)ny\n")
+                if len(difficulty) == 0:
+                    raise ValueError()
+            except ValueError:
+                self.clear_screen()
+                print("No difficulty entered")
+                print("Please try again")
+            else:
+                if difficulty[0].lower() == 'e':
+                    difficulty = 'easy'
+                elif difficulty[0].lower() == 'm':
+                    difficulty = 'medium'
+                elif difficulty[0].lower() == 'h':
+                    difficulty = 'hard'
+                else:
+                    difficulty = 'any'
+            
+                return difficulty
+
+
+    def get_question_type(self):
+        """
+        Prompts the user to select the type of questions for the quiz.
+        Valid answers are True/False or Multiple Choice
+        """
+        self.clear_screen()
+        # Loop until a valid selection is made
+        while True:
+            print(LOGO)
+            print("What type of questions do you want?")
+            try:
+                # Read the user input
+                response = int(input("1. True/False\n2. Multiple choice\n"))
+                # Validate user input
+                if response < 1 or response > 2:
+                    raise ValueError()
+            except ValueError:
+                # Clear screen and print error
+                self.clear_screen()
+                print("Invalid selection")
+                print("Please try again")
+
+            else:
+                # Return the type of questions selected
+                if response == 1:
+                    return 'boolean'
+                elif response == 2:
+                    return 'multiple'
 
 
     def get_questions(self):
@@ -158,7 +200,7 @@ class QuestionGeneretor(ClearMixin):
                 if question_amount < 10 or question_amount > 40:
                     raise ValueError()
                 # Store the number of questions to the instance variable
-                self.question_count = question_amount
+                return question_amount
                 # Exit the While loop
                 break
             except ValueError:
