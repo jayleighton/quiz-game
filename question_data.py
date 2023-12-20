@@ -39,14 +39,10 @@ class QuestionGeneretor(ClearMixin):
         list of Question objects.
         """
         self.question_count = self.get_question_count()
-        self.questions = {}
         self.question_category = self.get_question_category()
         self.difficulty = self.get_diffculty()
         self.question_type = self.get_question_type()
-        
-        
-        
-        self.get_questions()
+        self.questions = self.get_questions()
 
 
     def get_question_category(self):
@@ -171,7 +167,7 @@ class QuestionGeneretor(ClearMixin):
             # Call the API again
             results = self.post_request(parameters=params, message='Fetching questions for "Any" difficulty.\nPlease wait...')
         # Save the questions to the instance variable
-        self.questions = results
+        return results
 
  
     def post_request(self, parameters, message):

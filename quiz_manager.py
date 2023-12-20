@@ -22,7 +22,7 @@ class QuizManager(ClearMixin):
         self.clear_screen()
 
 
-    def has_question(self):
+    def has_question(self) -> bool:
         """
         Returns True if more questions are available
         """
@@ -56,30 +56,41 @@ class QuizManager(ClearMixin):
                 self.check_answer(user_answer)
                 break
 
-    def show_answer_prompt(self):
+    def show_answer_prompt(self) -> str:
+        """
+        Formulates the answer prompt based on the question type.
+        returns the answer prompt as a string
+        """
+        # Validate question type
         if self.current_question.question_type == "boolean":
             return "\n(T)rue or (F)alse\n"
         elif self.current_question.question_type == 'multiple':
+            # Create list from incorrect and correct answers
             self.multiple_answer_list = self.current_question.incorrect_answers
             self.multiple_answer_list.append(
                 self.current_question.question_answer)
+            # Randomize the list
             random.shuffle(self.multiple_answer_list)
+            # Create the result string
             result = "\n"
             for index in range(len(self.multiple_answer_list)):
+                # Remove special characters from list
                 self.multiple_answer_list[index] = html.unescape(
                     self.multiple_answer_list[index])
+                # Formulate line to add to result string
                 result += f"{index + 1}. "\
                     f"{html.unescape(self.multiple_answer_list[index])}\n"
             return result
 
-    
-    def check_answer(self, users_answer):
+
+    def check_answer(self, users_answer: str):
         """
         Receives the users answer as a parameter and check it against the
         correct answer
         Sets the answer response
         """
         correct_answer = self.current_question.question_answer
+        # Validate the question type
         if self.current_question.question_type == 'boolean':
             if users_answer[0].lower() == correct_answer[0].lower():
                 self.message = "Well Done! That is correct\n"
