@@ -3,7 +3,8 @@ import os
 from question_data import LOGO
 import math
 from clearmixin import ClearMixin
-
+import html
+import random
 
 class QuizManager(ClearMixin):
     def __init__(self, question_list):
@@ -17,6 +18,7 @@ class QuizManager(ClearMixin):
         self.question_list = question_list
         self.current_question = None
         self.message = ""
+        self.multiple_answer_list = []
         self.clear_screen()
 
 
@@ -42,8 +44,7 @@ class QuizManager(ClearMixin):
                 q_text = self.current_question.question_text
                 print(f"Q.{self.question_number}: {q_text}")
                 # Get the user answer
-                user_answer = input('(T)rue or (F)alse\n')
-                    
+                user_answer = input(self.show_answer_prompt())
                 # Check that an answer was provided
                 if len(user_answer) == 0:
                     raise ValueError()
@@ -55,7 +56,23 @@ class QuizManager(ClearMixin):
                 self.check_answer(user_answer)
                 break
 
+    def show_answer_prompt(self):
+        if self.current_question.question_type == "boolean":
+            return "\n(T)rue or (F)alse\n"
+        elif self.current_question.question_type == 'multiple':
+            self.multiple_answer_list = self.current_question.incorrect_answers
+            self.multiple_answer_list.append(
+                self.current_question.question_answer)
+            random.shuffle(self.multiple_answer_list)
+            result = "\n"
+            for index in range(len(self.multiple_answer_list)):
+                self.multiple_answer_list[index] = html.unescape(
+                    self.multiple_answer_list[index])
+                result += f"{index + 1}. "\
+                    f"{html.unescape(self.multiple_answer_list[index])}\n"
+            return result
 
+    
     def check_answer(self, users_answer):
         """
         Receives the users answer as a parameter and check it against the
@@ -63,12 +80,21 @@ class QuizManager(ClearMixin):
         Sets the answer response
         """
         correct_answer = self.current_question.question_answer
-        if users_answer[0].lower() == correct_answer[0].lower():
-            self.message = "Well Done! That is correct\n"
-            self.score += 1
-        else:
-            self.message = f"Incorrect! The correct answer was: "\
-                f"{correct_answer}\n"
+        if self.current_question.question_type == 'boolean':
+            if users_answer[0].lower() == correct_answer[0].lower():
+                self.message = "Well Done! That is correct\n"
+                self.score += 1
+            else:
+                self.message = f"Incorrect! The correct answer was: "\
+                    f"{correct_answer}\n"
+        elif self.current_question.question_type == 'multiple':
+            if self.multiple_answer_list[int(users_answer)-1] == \
+                                                correct_answer:
+                self.message = "Well Done! That is correct\n"
+                self.score += 1
+            else:
+                self.message = f"Incorrect! The correct answer was: "\
+                    f"{correct_answer}\n"
         # Clear the display
         self.clear_screen()
 

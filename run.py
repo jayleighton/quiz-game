@@ -17,10 +17,11 @@ def main():
         question_list = []
         for question_data in question_data:
             question_text = html.unescape(question_data['question'])
-            question_answer = question_data['correct_answer']
+            question_answer = html.unescape(question_data['correct_answer'])
             incorrect_answers = question_data['incorrect_answers']
+            question_type = question_data['type']
             new_question = Question(question_text, question_answer,
-                                    incorrect_answers)
+                                    incorrect_answers, question_type)
             question_list.append(new_question)
 
         # Initialize the quiz manager

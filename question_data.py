@@ -147,9 +147,9 @@ class QuestionGeneretor(ClearMixin):
         # Set the amount of questions parameter and the question type
         params = {
             'amount': self.question_count,
-            'type': 'boolean',
+            'type': self.question_type,
         }
-        
+                
         # Check the category and add the parameter if not any
         if self.question_category != 'Any':
             params['category'] = CATEGORIES[self.question_category]
