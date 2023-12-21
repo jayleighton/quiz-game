@@ -1,5 +1,5 @@
 import requests
-import os
+import os, sys
 import time
 from clearmixin import ClearMixin
 
@@ -30,7 +30,6 @@ CATEGORIES = {
 
 DIFFICULTY_LIST = ['Easy', 'Medium', 'Hard', 'Any']
 
-
 class QuestionGeneretor(ClearMixin):
     def __init__(self):
         """
@@ -40,22 +39,22 @@ class QuestionGeneretor(ClearMixin):
         Obtains questions via API and stores to an instance variable as a
         list of Question objects.
         """
+        self.message = ""
         self.question_count = self.get_question_count()
         self.question_category = self.get_question_category()
         self.difficulty = self.get_difficulty()
         self.question_type = self.get_question_type()
         self.questions = self.get_questions()
-        self.message = ""
+        
 
 
     def get_question_category(self):
         """
         Prompts the user to select the question category from a list.
         """
-        # Clear the screen
-        self.clear_screen()
-        print(LOGO)
         while True:
+            print(LOGO)
+            print(self.message)
             print("Please select a category from the list:")
             # Validate category dict is not blank
             if len(CATEGORIES) > 0:
@@ -66,14 +65,20 @@ class QuestionGeneretor(ClearMixin):
                     print(f"{index + 1}: {category_list[index]}")
                 try:
                     # Validate input
-                    selected_category = int(input("Please enter your category number:\n"))
-                    if selected_category < 1 or selected_category > len(category_list):
+                    selected_category = int(input(
+                        "Please enter your category number:\n"))
+                    if selected_category < 1 or\
+                            selected_category > len(category_list):
                         raise ValueError(selected_category)
-                    return category_list[selected_category -1]
+                    return category_list[selected_category - 1]
                     break
                 except ValueError as e:
                     self.clear_screen()
-                    print(f"\nInvalid category selected.\nPlease enter a category between 1 and {len(category_list)}")
+                    self.message = f"\nInvalid category selected.\nPlease "\
+                        f"enter a category between 1 and {len(category_list)}"
+                else:
+                    self.message = ""
+                    self.clear_screen()
 
 
     def get_difficulty(self):
@@ -86,7 +91,7 @@ class QuestionGeneretor(ClearMixin):
         # Prompt user to select difficulty
         while True:
             print(LOGO)
-            print("Choose a difficulty\n")
+            print(self.message)
             try:
                 print("Please choose a difficulty:")
                 difficulty_string = ""
@@ -98,11 +103,11 @@ class QuestionGeneretor(ClearMixin):
                     raise ValueError()
             except ValueError:
                 self.clear_screen()
-                print("No difficulty entered")
-                print("Please try again")
+                self.message = "No difficulty entered. Please try again"
             else:
                 difficulty = DIFFICULTY_LIST[difficulty-1].lower()
-            
+                self.message = ""
+                self.clear_screen()
                 return difficulty
 
 
@@ -115,6 +120,7 @@ class QuestionGeneretor(ClearMixin):
         # Loop until a valid selection is made
         while True:
             print(LOGO)
+            print(self.message)
             print("What type of questions do you want?")
             try:
                 # Read the user input
@@ -125,11 +131,12 @@ class QuestionGeneretor(ClearMixin):
             except ValueError:
                 # Clear screen and print error
                 self.clear_screen()
-                print("Invalid selection")
-                print("Please try again")
-
+                self.message = "Invalid selection. Please try again\n"
+                
             else:
                 # Return the type of questions selected
+                self.message = ""
+                self.clear_screen()
                 if response == 1:
                     return 'boolean'
                 elif response == 2:
@@ -183,9 +190,11 @@ class QuestionGeneretor(ClearMixin):
         Prompt the user for the number of questions.
         Validates the amount entered and stores to an instance variable
         """
-        print(LOGO)
+        
         print("Welcome to the Quiz Game")
         while True:
+            print(LOGO)
+            print(self.message)
             try:
                 # Prompt for the number of questions
                 print("How many questions would you like?\n")
@@ -193,17 +202,17 @@ class QuestionGeneretor(ClearMixin):
                 # Validate the input
                 if question_amount == 0:
                     print('Exiting')
-                    break
+                    sys.exit()
                 if question_amount < 10 or question_amount > 40:
                     raise ValueError()
-                # Store the number of questions to the instance variable
-                return question_amount
-                # Exit the While loop
-                break
             except ValueError:
                 # Input error, prompt again
                 self.clear_screen()
-                print(LOGO)
-                print("Please enter a valid value between 10 and 40")
+                self.message = "Please enter a valid value between 10 and 40"
+            else:
+                self.message = ""
+                self.clear_screen()
+                # Return the question count selected
+                return question_amount
 
 
