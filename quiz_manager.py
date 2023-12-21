@@ -46,11 +46,25 @@ class QuizManager(ClearMixin):
                 # Get the user answer
                 user_answer = input(self.show_answer_prompt())
                 # Check that an answer was provided
-                if len(user_answer) == 0:
-                    raise ValueError()
+                if self.current_question.question_type == 'boolean':
+                    if len(user_answer) == 0:
+                        raise ValueError()
+                    elif user_answer[0].lower() != 't' and\
+                            user_answer[0].lower() != 'f':
+                        raise ValueError()
+                if self.current_question.question_type == 'multiple':
+                    if int(user_answer) < 1 or \
+                            int(user_answer) > len(self.multiple_answer_list):
+                        raise ValueError()
             except ValueError:
                 self.clear_screen()
-                print("Invalid answer supplied.\nPlease try again\n")
+                self.message = "Invalid answer supplied. Please try again\n"
+                if self.current_question.question_type == 'multiple':
+                    self.message += f"Please select and answer between 1 and "\
+                        f"{len(self.multiple_answer_list)}"
+                else:
+                    self.message += "Please select (T)rue or (F)alse"
+
             else:
                 # Check the users answer against for the current question
                 self.check_answer(user_answer)
@@ -67,12 +81,16 @@ class QuizManager(ClearMixin):
         elif self.current_question.question_type == 'multiple':
             # Create list from incorrect and correct answers
             self.multiple_answer_list = self.current_question.incorrect_answers
-            self.multiple_answer_list.append(
-                self.current_question.question_answer)
+            # Check that the correct answer is not in the list before appending
+            if self.current_question.question_answer not in \
+                    self.multiple_answer_list:
+                self.multiple_answer_list.append(
+                    self.current_question.question_answer)
             # Randomize the list
             random.shuffle(self.multiple_answer_list)
             # Create the result string
             result = "\n"
+            
             for index in range(len(self.multiple_answer_list)):
                 # Remove special characters from list
                 self.multiple_answer_list[index] = html.unescape(

@@ -28,6 +28,8 @@ CATEGORIES = {
     'Any': 0,
 }
 
+DIFFICULTY_LIST = ['Easy', 'Medium', 'Hard', 'Any']
+
 
 class QuestionGeneretor(ClearMixin):
     def __init__(self):
@@ -40,9 +42,10 @@ class QuestionGeneretor(ClearMixin):
         """
         self.question_count = self.get_question_count()
         self.question_category = self.get_question_category()
-        self.difficulty = self.get_diffculty()
+        self.difficulty = self.get_difficulty()
         self.question_type = self.get_question_type()
         self.questions = self.get_questions()
+        self.message = ""
 
 
     def get_question_category(self):
@@ -73,7 +76,7 @@ class QuestionGeneretor(ClearMixin):
                     print(f"\nInvalid category selected.\nPlease enter a category between 1 and {len(category_list)}")
 
 
-    def get_diffculty(self):
+    def get_difficulty(self):
         """
         Prompts the user for the difficulty level.
         The user can choose from Easy, Medium, Hard or Any
@@ -85,22 +88,20 @@ class QuestionGeneretor(ClearMixin):
             print(LOGO)
             print("Choose a difficulty\n")
             try:
-                difficulty = input("(E)asy, (M)edium, (H)ard, or (A)ny\n")
-                if len(difficulty) == 0:
+                print("Please choose a difficulty:")
+                difficulty_string = ""
+                for index in range(len(DIFFICULTY_LIST)):
+                    text = f'{index + 1}. {DIFFICULTY_LIST[index]}\n'
+                    difficulty_string += text
+                difficulty = int(input(difficulty_string))
+                if difficulty < 1 or difficulty > len(DIFFICULTY_LIST):
                     raise ValueError()
             except ValueError:
                 self.clear_screen()
                 print("No difficulty entered")
                 print("Please try again")
             else:
-                if difficulty[0].lower() == 'e':
-                    difficulty = 'easy'
-                elif difficulty[0].lower() == 'm':
-                    difficulty = 'medium'
-                elif difficulty[0].lower() == 'h':
-                    difficulty = 'hard'
-                else:
-                    difficulty = 'any'
+                difficulty = DIFFICULTY_LIST[difficulty-1].lower()
             
                 return difficulty
 
