@@ -2,13 +2,16 @@ from question_data import QuestionGeneretor
 import html
 from question_object import Question
 from quiz_manager import QuizManager
-import os
+from clearmixin import ClearMixin
 
 
 def main():
 
     # Game loop
     while True:
+        # Initialize Mixin object for mixin functions
+        my_mix = ClearMixin()
+
         # Initialize question generator
         question_generator = QuestionGeneretor()
         question_data = question_generator.questions
@@ -28,7 +31,7 @@ def main():
         quiz_manager = QuizManager(question_list)
 
         # Clear the console
-        os.system('clear')
+        my_mix.clear_screen()
 
         # Run the game while more questions are available
         while quiz_manager.has_question():
@@ -43,7 +46,7 @@ def main():
             print("Thanks for playing!")
             break
         else:
-            os.system('clear')
+            my_mix.clear_screen()
 
 
 main()

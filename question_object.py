@@ -9,4 +9,3 @@ class Question:
         self.question_answer = question_answer
         self.incorrect_answers = incorrect_answers
         self.question_type = question_type
-        

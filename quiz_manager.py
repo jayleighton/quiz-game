@@ -1,10 +1,9 @@
 from question_object import Question
-import os
-from question_data import LOGO
 import math
 from clearmixin import ClearMixin
 import html
 import random
+
 
 class QuizManager(ClearMixin):
     def __init__(self, question_list):
@@ -21,13 +20,11 @@ class QuizManager(ClearMixin):
         self.multiple_answer_list = []
         self.clear_screen()
 
-
     def has_question(self) -> bool:
         """
         Returns True if more questions are available
         """
         return self.question_number < len(self.question_list)
-
 
     def next_question(self):
         """
@@ -37,7 +34,7 @@ class QuizManager(ClearMixin):
         self.current_question = self.question_list[self.question_number]
         self.question_number += 1
         while True:
-            print(LOGO)
+            self.show_logo()
             print(self.message)
             try:
                 # Display the question
@@ -90,7 +87,6 @@ class QuizManager(ClearMixin):
             random.shuffle(self.multiple_answer_list)
             # Create the result string
             result = "\n"
-            
             for index in range(len(self.multiple_answer_list)):
                 # Remove special characters from list
                 self.multiple_answer_list[index] = html.unescape(
@@ -99,7 +95,6 @@ class QuizManager(ClearMixin):
                 result += f"{index + 1}. "\
                     f"{html.unescape(self.multiple_answer_list[index])}\n"
             return result
-
 
     def check_answer(self, users_answer: str):
         """
@@ -127,7 +122,6 @@ class QuizManager(ClearMixin):
         # Clear the display
         self.clear_screen()
 
-
     def show_result(self):
         """
         Called to display the current correct score count to the user
@@ -135,7 +129,7 @@ class QuizManager(ClearMixin):
         """
         # Calculate correct percentage
         result = (self.score / self.question_number) * 100
-        print(LOGO)
+        self.show_logo()
         print("Quiz Complete!\n")
         # Set the message based on the calculated percentage
         if result < 50:
@@ -146,4 +140,4 @@ class QuizManager(ClearMixin):
             print("Excellent!")
         # Print the result
         print(f"\nYour score is: {self.score}/{self.question_number}"
-            f", {math.floor(result)}% ")
+              f", {math.floor(result)}% ")
