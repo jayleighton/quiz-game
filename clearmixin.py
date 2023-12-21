@@ -13,11 +13,10 @@ class ClearMixin:
             os.system('clear')
 
     def show_logo(self):
-        
         LOGO = """
-         __          __          
-        /  \   ._   / _  _  _  _ 
-        \_\/|_||/_  \__)(_||||(- 
-                         
+         __          __
+        /  \   ._   / _  _  _  _
+        \_\/|_||/_  \__)(_||||(-
+
         """
         print(LOGO)
