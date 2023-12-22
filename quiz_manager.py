@@ -130,6 +130,8 @@ class QuizManager(ClearMixin):
         # Calculate correct percentage
         result = (self.score / self.question_number) * 100
         self.show_logo()
+        # Print the result of the last question
+        print(self.message)
         print("Quiz Complete!\n")
         # Set the message based on the calculated percentage
         if result < 50:
@@ -139,5 +141,5 @@ class QuizManager(ClearMixin):
         else:
             print("Excellent!")
         # Print the result
-        print(f"\nYour score is: {self.score}/{self.question_number}"
+        print(f"Your score is: {self.score}/{self.question_number}"
               f", {math.floor(result)}% ")
