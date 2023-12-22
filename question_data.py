@@ -94,7 +94,7 @@ class QuestionGeneretor(ClearMixin):
             except ValueError:
                 # Clear the screen and generate error message
                 self.clear_screen()
-                self.message = "No difficulty entered. Please try again"
+                self.message = "Invalid difficulty entered. Please try again"
             else:
                 difficulty = DIFFICULTY_LIST[difficulty-1].lower()
                 self.message = ""
