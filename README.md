@@ -1,16 +1,55 @@
 # The Quiz Game
 
-Welcome,
+The Quiz Game is a Python terminal game, which runs is a mock terminal on Heroku.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+Users can test their knowledge on a range of subjects of varying difficulty.
 
-## Reminders
+[The live version of the project is available here](https://quiz-game-9ac41298d590.herokuapp.com/)
+
+![Responsive screenshot](documentation/testing/responsive-screenshot.png)
+
+## How to play
+
+## Features
+
+### Existing Features
+
+### Future Features
+
+
+## Data Model
+
+
+## Testing
+
+### Bugs
+
+#### Solved Bugs
+
+
+#### Remaining Bugs
+
+### Validator Testing
+
+
+## Deployment
+
+### Local Development
+
+#### How to clone the repository
+
+#### How to fork the repository
+
+
+### How to deploy the game
+
+#### Reminders
 
 - Your code must be placed in the `run.py` file
 - Your dependencies must be placed in the `requirements.txt` file
 - Do not edit any of the other files or your code may not deploy properly
 
-## Creating the Heroku app
+#### Creating the Heroku app
 
 When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
 
@@ -23,7 +62,7 @@ If you have credentials, such as in the Love Sandwiches project, you must create
 
 Connect your GitHub repository and deploy as normal.
 
-## Constraints
+#### Constraints
 
 The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
 
