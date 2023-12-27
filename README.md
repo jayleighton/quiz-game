@@ -9,11 +9,35 @@ Users can test their knowledge on a range of subjects of varying difficulty.
 ![Responsive screenshot](documentation/testing/responsive-screenshot.png)
 
 ## How to play
+In this version of The Quiz Game, the user is prompted to answer some configuration questions.
+
+Once the questions are answered, the application will generate a series of questions which are presented to the user to answer.
+
+The answers to the questions with either be T or F for True/False questions or an integer ranging from 1 to 4 for multiple choice questions.
+
+Once the quiz is complete the user is presented with their score of correct answers out of the total number of questions.
 
 ## Features
 
 ### Existing Features
 
+- Question configuration
+    - The user is prompted to provide answers to the following configuration questions:
+        - Number of questions for the game
+        ![Number of questions](documentation/testing/number-questions-screenshot.png)
+        - Specific category of questions or any category
+        ![Category of questions](documentation/testing/question-category-screenshot.png)
+        - Difficulty or questions
+        ![Difficulty selection](documentation/testing/question-difficulty-screenshot.png)
+        - Type of questions 
+        ![Question type](documentation/testing/question-type-screenshot.png)
+    - Once the configuration questions have been answered, questions are retrieved via API from the [Open Trivia Database](https://opentdb.com/) and the game will proceed to ask the questions one by one.
+    - Once all questions have been answered, the user is presented with their score of correct answers out of 
+    the total number of questions as well a correct percentage.
+    - The user is also offered an opportunity to start the Quiz Game again and continue playing or to quit the game
+    ![Quiz complete](documentation/testing/quiz-complete-screenshot.png)
+
+    
 ### Future Features
 
 
