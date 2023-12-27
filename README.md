@@ -40,20 +40,62 @@ Once the quiz is complete the user is presented with their score of correct answ
     the total number of questions as well a correct percentage.
     - The user is also offered an opportunity to start the Quiz Game again and continue playing or to quit the game
     ![Quiz complete](documentation/testing/quiz-complete-screenshot.png)
-
+    
+    - All data is maintained in class instances
     
 ### Future Features
-
+    - Allow for additional question categories to be selected
+    - Enable for than one person/team to compete in the Quiz Game
+    - Enable questions that require typed answers
+    - Enable selection of multiple question types per game
 
 ## Data Model
 
+I decided to use a series of classes, each class is responsible for a different aspect of the game.
+The following classes were implemented which are detailed below:
+- Question
+- Question Generator
+- Quiz Manager
+- Clear Mixin
+
+### Question Class
+
+The Question class is responsible for storing various attributes for each of the questions.
+The attributes handled by this class are as follows:
+- Question text
+- Correct answer to the question
+- A list of incorrect answers
+- The type of question
+
+### Question Generator Class
+
+- The Question Generator class is responsible for getting answers to the configuration questions.
+- With these responses, this class uses an API call to obtain questions from the Open Trivia Database.
+- In the event that no questions are returned based on the difficulty level, a second API call is used to fetch questions for any diffuculty level.
+
+### Quiz Manager Class
+
+- The Quiz Manager class is responsible for running the game until no questions remain
+- The class handles the following elements of the game:
+    - Asking of the questions
+    - Reading and validating the answer input
+    - Verifying if the answer is correct
+    - Updating the user score
+    - Computing the total score and correct answer percentage once the quiz completes
+     
+### Clear Mixin Class
+
+The Clear Mixin class contains shared functions used to display the logo within the various classes as well as a clear screen function which clears the terminal display using the correct operating system command based on the operating system the terminal application is running on.
 
 ## Testing
 
 ### Bugs
 
-#### Solved Bugs
 
+#### Solved Bugs
+- The length of the category list was initally hard-coded which caused issues when adding additional categories.
+    - The category length was updated to be dynamically calculated during the running of the game
+    
 
 #### Remaining Bugs
 
