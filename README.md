@@ -95,9 +95,21 @@ The Clear Mixin class contains shared functions used to display the logo within 
 #### Solved Bugs
 - The length of the category list was initally hard-coded which caused issues when adding additional categories.
     - The category length was updated to be dynamically calculated during the running of the game
-    
+- Questions with special characters were formatted incorrectly.
+    - Introduced the html unescape function to convert special characters to plain text
+- Blank answers that were submitted created validation problems.
+    - Updated validation to ensure no blank answers are submitted
+- Where questions do not exist for a category and difficulty combination, the game could not run
+    - Changed the code to verify that an empty question object is not received from the API, when this is the case, a second API call is completed with a random "any" difficulty selected
+- The API only allows for 1 call every 5 seconds.
+    - When calling the API for a second time, a 5 second delay was added to ensure the API call is not rejected
+- Selecting a value outside of the multiple choice answer list causes the correct answer to be added to the list and displayed again.
+    - Added verification to the answer list to ensure the correct answer is not appended again.
+- An ASCII art logo containing backslash characters generated code linter warnings
+    - Selected a different ASCII art logo to avoid linter issues
 
 #### Remaining Bugs
+- There are no remaining bugs in the application
 
 ### Validator Testing
 
