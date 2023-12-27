@@ -32,6 +32,10 @@ Once the quiz is complete the user is presented with their score of correct answ
         - Type of questions 
         ![Question type](documentation/testing/question-type-screenshot.png)
     - Once the configuration questions have been answered, questions are retrieved via API from the [Open Trivia Database](https://opentdb.com/) and the game will proceed to ask the questions one by one.
+        - True/False Question Example:  
+        ![True/False question screenshot](documentation/testing/true-false-question-screenshot.png)
+        - Multiple Choice Question Sample:
+        ![Multiple choice question screenshot](documentation/testing/multiple-choice-question-screenshot.png)
     - Once all questions have been answered, the user is presented with their score of correct answers out of 
     the total number of questions as well a correct percentage.
     - The user is also offered an opportunity to start the Quiz Game again and continue playing or to quit the game
