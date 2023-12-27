@@ -9,13 +9,13 @@ Users can test their knowledge on a range of subjects of varying difficulty.
 ![Responsive screenshot](documentation/testing/responsive-screenshot.png)
 
 ## How to play
-In this version of The Quiz Game, the user is prompted to answer some configuration questions.
+In this version of The Quiz Game, the user is prompted to answer some configuration questions which drive the selection of questions, categories etc.
 
 Once the questions are answered, the application will generate a series of questions which are presented to the user to answer.
 
 The answers to the questions with either be T or F for True/False questions or an integer ranging from 1 to 4 for multiple choice questions.
 
-Once the quiz is complete the user is presented with their score of correct answers out of the total number of questions.
+Once the quiz is complete the user is presented with their score of correct answers out of the total number of questions along with a percentage of correct answers.
 
 ## Features
 
