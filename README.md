@@ -136,14 +136,26 @@ All code has been validated using the [Code Institute PEP8 validator](https://pe
 
 ![clearmixin.py result](documentation/testing/clearmixin_validation.png)
 
-## Deployment
+## Deployment & Local Development
 
 ### Local Development
-
 #### How to clone the repository
+To Clone the Quiz Game repository:
+
+1. Log in to Github
+2. Got to the repository for this application, jayleighton/quiz-game
+3. Click on the Code button at the top right of the screen and select HTTPS, SSH, or GitHub CLI
+4. Copy the link
+5. Open the terminal on your code editor in the directory where the project needs to be cloned
+6. Enter 'git clone' into the terminal and paste the Github link
+7. Press enter to clone the repository
 
 #### How to fork the repository
+To fork the Quiz Game Repository:
 
+1. Log in to Github
+2. Go to the repository for this website, jayleighton/quiz-game
+3. Select Fork at the top of the screen
 
 ### How to deploy the game
 
@@ -174,4 +186,11 @@ Connect your GitHub repository and deploy as normal.
 The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
 
 ## Credits
+
+### Code Credits
+
+- Code Institute
+    - Mock terminal code on Heroku
+- [Patprjk ASCII ART Generator](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20)
+    - ASCII Art generation
 
