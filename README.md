@@ -19,6 +19,10 @@ Once the quiz is complete the user is presented with their score of correct answ
 
 ## Features
 
+### Game Workflow
+
+[Process flows for the game](documentation/workflow/quiz-game-workflow.pdf)
+
 ### Existing Features
 
 - Question configuration
@@ -60,7 +64,7 @@ Once the quiz is complete the user is presented with their score of correct answ
     
 ### Future Features
     - Allow for additional question categories to be selected
-    - Enable for than one person/team to compete in the Quiz Game
+    - Enable more than one person/team to compete in the Quiz Game
     - Enable questions that require typed answers
     - Enable selection of multiple question types per game
 
