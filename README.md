@@ -31,7 +31,7 @@ Once the quiz is complete the user is presented with their score of correct answ
 
         ![Category of questions](documentation/testing/question-category-screenshot.png)
 
-        - Difficulty or questions
+        - Difficulty of questions
 
         ![Difficulty selection](documentation/testing/question-difficulty-screenshot.png)
 
@@ -86,7 +86,7 @@ The attributes handled by this class are as follows:
 
 - The Question Generator class is responsible for getting answers to the configuration questions.
 - With these responses, this class uses an API call to obtain questions from the Open Trivia Database.
-- In the event that no questions are returned based on the difficulty level, a second API call is used to fetch questions for any diffuculty level.
+- In the event that no questions are returned based on the difficulty level, a second API call is used to fetch questions for any difficulty level.
 
 ### Quiz Manager Class
 
@@ -109,7 +109,7 @@ The Clear Mixin class contains shared functions as follows:
 ### Bugs
 
 #### Solved Bugs
-- The length of the category list was initally hard-coded which caused issues when adding additional categories.
+- The length of the category list was initially hard-coded which caused issues when adding additional categories.
     - The category length was updated to be dynamically calculated during the running of the game
 - Questions with special characters were formatted incorrectly.
     - Introduced the html unescape function to convert special characters to plain text
