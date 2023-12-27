@@ -80,17 +80,18 @@ The attributes handled by this class are as follows:
     - Asking of the questions
     - Reading and validating the answer input
     - Verifying if the answer is correct
-    - Updating the user score
+    - Storing and updating the user score
     - Computing the total score and correct answer percentage once the quiz completes
      
 ### Clear Mixin Class
 
-The Clear Mixin class contains shared functions used to display the logo within the various classes as well as a clear screen function which clears the terminal display using the correct operating system command based on the operating system the terminal application is running on.
+The Clear Mixin class contains shared functions as follows:
+- Display the ASCII Art logo within the various classes 
+- Clear screen function which clears the terminal display using the correct operating system command based on the operating system the terminal application is running on.
 
 ## Testing
 
 ### Bugs
-
 
 #### Solved Bugs
 - The length of the category list was initally hard-coded which caused issues when adding additional categories.
@@ -118,15 +119,19 @@ All code has been validated using the [Code Institute PEP8 validator](https://pe
 - run.py validation
 
 ![run.py result](documentation/testing/run-file-validation.png)
+
 - question_data.py validation
 
 ![question_data.py result](documentation/testing/question-data-validation.png)
+
 - question_object.py validation
 
 ![question_object.py result](documentation/testing/question-object-validation.png)
+
 - quiz_manager.py validation
 
 ![quiz_manager.py result](documentation/testing/quiz-manager-validation.png)
+
 - clearmixin.py validation
 
 ![clearmixin.py result](documentation/testing/clearmixin_validation.png)
@@ -144,7 +149,12 @@ All code has been validated using the [Code Institute PEP8 validator](https://pe
 
 #### Reminders
 
-- Your code must be placed in the `run.py` file
+- Your code must be placed in the following files:
+    - `run.py`
+    - `quiz_manager.py`
+    - `question_object.py`
+    - `question_data.py`
+    - `clearmixin.py`
 - Your dependencies must be placed in the `requirements.txt` file
 - Do not edit any of the other files or your code may not deploy properly
 
@@ -157,14 +167,11 @@ When you create the app, you will need to add two buildpacks from the _Settings_
 
 You must then create a _Config Var_ called `PORT`. Set this to `8000`
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
 Connect your GitHub repository and deploy as normal.
 
 #### Constraints
 
 The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
 
----
+## Credits
 
-Happy coding!
