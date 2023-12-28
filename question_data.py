@@ -171,7 +171,7 @@ class QuestionGeneretor(ClearMixin):
 
     def post_request(self, parameters, message):
         """
-        User the parameters and message to process the post request.
+        Use the parameters and message to process the post request.
         """
         TRIVIA_URL = 'https://opentdb.com/api.php'
         # Print the user message

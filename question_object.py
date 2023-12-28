@@ -4,6 +4,7 @@ class Question:
         """
         Creates an instance of the Question object.
         Stores the question and answer text using instance variables
+        Stores a list of incorrect answers and question type using instance variables
         """
         self.question_text = question_text
         self.question_answer = question_answer
