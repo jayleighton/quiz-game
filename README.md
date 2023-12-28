@@ -1,10 +1,10 @@
 # The Quiz Game
 
-The Quiz Game is a Python terminal game, which runs is a mock terminal on Heroku.
+The Quiz Game is a Python terminal game, which runs in a mock terminal on Heroku.
 
-Users can test their knowledge on a range of subjects of varying difficulty.
+Users can test their knowledge on a range of subjects, with varying difficulty.
 
-[The live version of the project is available here](https://quiz-game-9ac41298d590.herokuapp.com/)
+[Play the live version of the project on Heroku](https://quiz-game-9ac41298d590.herokuapp.com/)
 
 ![Responsive screenshot](documentation/testing/responsive-screenshot.png)
 
@@ -13,7 +13,7 @@ In this version of The Quiz Game, the user is prompted to answer some configurat
 
 Once the questions are answered, the application will generate a series of questions which are presented to the user to answer.
 
-The answers to the questions with either be T or F for True/False questions or an integer ranging from 1 to 4 for multiple choice questions.
+The answers to the questions are entered with either be "T" or "F" for True/False questions or an integer ranging from 1 to 4 for multiple choice questions.
 
 Once the quiz is complete the user is presented with their score of correct answers out of the total number of questions along with a percentage of correct answers.
 
@@ -27,19 +27,19 @@ Once the quiz is complete the user is presented with their score of correct answ
 
 - Question configuration
     - The user is prompted to provide answers to the following configuration questions:
-        - Number of questions for the game
+        - Number of questions for the game ranging from 10 to 40
 
         ![Number of questions](documentation/testing/number-questions-screenshot.png)
 
-        - Specific category of questions or any category
+        - Specific category of questions or multiple categories
 
         ![Category of questions](documentation/testing/question-category-screenshot.png)
 
-        - Difficulty of questions
+        - Specific difficulty of questions or multiple difficulties
 
         ![Difficulty selection](documentation/testing/question-difficulty-screenshot.png)
 
-        - Type of questions 
+        - Type of questions, True/False or Multiple Choice 
 
         ![Question type](documentation/testing/question-type-screenshot.png)
         
@@ -49,7 +49,7 @@ Once the quiz is complete the user is presented with their score of correct answ
         
         ![True/False question screenshot](documentation/testing/true-false-question-screenshot.png)
         
-        - Multiple Choice Question Sample:
+        - Multiple Choice Question Example:
         
         ![Multiple choice question screenshot](documentation/testing/multiple-choice-question-screenshot.png)
     
@@ -105,7 +105,7 @@ The attributes handled by this class are as follows:
 ### Clear Mixin Class
 
 The Clear Mixin class contains shared functions as follows:
-- Display the ASCII Art logo within the various classes 
+- Display the ASCII Art logo
 - Clear screen function which clears the terminal display using the correct operating system command based on the operating system the terminal application is running on.
 
 ## Testing
@@ -166,14 +166,14 @@ To Clone the Quiz Game repository:
 3. Click on the Code button at the top right of the screen and select HTTPS, SSH, or GitHub CLI
 4. Copy the link
 5. Open the terminal on your code editor in the directory where the project needs to be cloned
-6. Enter 'git clone' into the terminal and paste the Github link
+6. Enter `git clone` into the terminal and paste the Github link
 7. Press enter to clone the repository
 
 #### How to fork the repository
 To fork the Quiz Game Repository:
 
 1. Log in to Github
-2. Go to the repository for this website, jayleighton/quiz-game
+2. Go to the repository for this project, jayleighton/quiz-game
 3. Select Fork at the top of the screen
 
 ### How to deploy the game
