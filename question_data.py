@@ -153,29 +153,31 @@ class QuestionGeneretor(ClearMixin):
 
         results = self.post_request(
             parameters=params,
-            message="Getting questions")
+            message="Getting questions",
+            wait_time=0)
         # Validate the question list is not empty
         if len(results) == 0 and self.difficulty != 'any':
             # Set the difficulty to Any
             del params['difficulty']
-            # Wait 5 seconds due to API restriction
-            time.sleep(5)
             # Call the API again
             post_message = 'No questions for difficulty selected.\n'
             post_message += 'Fetching questions for "Any" difficulty.\n'
-            post_message += 'Please wait...'
+            post_message += 'Please wait 5 seconds...'
             results = self.post_request(
-                parameters=params, message=post_message)
+                parameters=params, message=post_message,
+                wait_time=5)
         # Save the questions to the instance variable
         return results
 
-    def post_request(self, parameters, message):
+    def post_request(self, parameters, message, wait_time: int):
         """
         Use the parameters and message to process the post request.
         """
         TRIVIA_URL = 'https://opentdb.com/api.php'
         # Print the user message
         print(message)
+        if wait_time > 0:
+            time.sleep(wait_time)
         result = requests.get(url=TRIVIA_URL, params=parameters)
         result.raise_for_status()
         return result.json()['results']
