@@ -23,6 +23,10 @@ Once the quiz is complete the user is presented with their score of correct answ
 
 [Process flows for the game](documentation/workflow/quiz-game-workflow.pdf)
 
+Two process flows are included:
+1. Handles the overall flow of the terminal application
+2. Covers the detail of the `Run Quiz Game` process contained within the main process flow
+
 ### Existing Features
 
 - Question configuration
@@ -107,6 +111,23 @@ The attributes handled by this class are as follows:
 The Clear Mixin class contains shared functions as follows:
 - Display the ASCII Art logo
 - Clear screen function which clears the terminal display using the correct operating system command based on the operating system the terminal application is running on.
+
+## Technology Stack Used
+
+### Languages
+The following language was used to create this project:
+- Python
+
+### Dependencies
+The project requires the following dependencies is order to run successfully:
+- Python3
+
+The following libraries are also required to run this project:
+- `requests 2.31.0`
+    - Required to facilitate the API calls to the Open Trivia Database
+- `urllib3 2.1.0`
+    - The requests library relies on the urllib3 library to complete the SSL connection with the API endpoint during the API call.
+
 
 ## Testing
 
