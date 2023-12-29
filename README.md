@@ -13,7 +13,7 @@ In this version of The Quiz Game, the user is prompted to answer some configurat
 
 Once the questions are answered, the application will generate a series of questions which are presented to the user to answer.
 
-The answers to the questions are entered with either be "T" or "F" for True/False questions or an integer ranging from 1 to 4 for multiple choice questions.
+The answers to the questions are entered with either be `T` or `F` for True/False questions or an integer ranging from `1` to `4` for multiple choice questions.
 
 Once the quiz is complete the user is presented with their score of correct answers out of the total number of questions along with a percentage of correct answers.
 
@@ -21,11 +21,11 @@ Once the quiz is complete the user is presented with their score of correct answ
 
 ### Game Workflow
 
-[Process flows for the game](documentation/workflow/quiz-game-workflow.pdf)
-
 Two process flows are included:
 1. Handles the overall flow of the terminal application
 2. Covers the detail of the `Run Quiz Game` process contained within the main process flow
+
+[Process flows for the game](documentation/workflow/quiz-game-workflow.pdf)
 
 ### Existing Features
 

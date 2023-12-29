@@ -8,8 +8,10 @@ class ClearMixin:
         the correct command to clear the console
         """
         if os.name == 'nt':
+            # Clear screen command for windows
             os.system('cls')
         elif os.name == 'posix':
+            # Clear screen command for Linux
             os.system('clear')
 
     def show_logo(self):
