@@ -41,7 +41,7 @@ def main():
         quiz_manager.show_result()
 
         # Check if users wants to play again
-        print("Do you want to play again?")
+        print("\nDo you want to play again?")
         result = input("(Y)es to play again. Any other key to exit\n")
         if result.upper() != 'Y':
             print("Thanks for playing!")
